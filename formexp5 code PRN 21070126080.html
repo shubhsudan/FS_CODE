@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 10px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form id="registrationForm" action="#" method="post">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName">
+            <span id="firstNameError" class="error"></span>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+            <span id="lastNameError" class="error"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span id="emailError" class="error"></span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span id="passwordError" class="error"></span>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registrationForm');
+
+            // firstname 
+            const firstName = document.getElementById('firstName');
+            const firstNameError = document.getElementById('firstNameError');
+
+            // lastname
+            const lastName = document.getElementById('lastName');
+            const lastNameError = document.getElementById('lastNameError');
+
+            // email
+            const email = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+
+            // password
+            const password = document.getElementById('password');
+            const passwordError = document.getElementById('passwordError');
+
+            form.addEventListener('submit', function (event) {
+                let hasError = false;
+
+                // Reset error messages
+                firstNameError.textContent = '';
+                lastNameError.textContent = '';
+                emailError.textContent = '';
+                passwordError.textContent = '';
+
+                if (firstName.value === '') {
+                    firstNameError.textContent = 'First Name Is Required';
+                    hasError = true;
+                }
+
+                if (lastName.value === '') {
+                    lastNameError.textContent = 'Last Name Is Required';
+                    hasError = true;
+                }
+
+                if (email.value === '') {
+                    emailError.textContent = 'Email Is Required';
+                    hasError = true;
+                } else if (!email.value.includes('@') || !email.value.includes('.')) {
+                    emailError.textContent = 'Email Is Not A Valid Email Address';
+                    hasError = true;
+                }
+
+                if (password.value === '') {
+                    passwordError.textContent = 'Password Is Required';
+                    hasError = true;
+                } else if (password.value.length < 10) {
+                    passwordError.textContent = 'Password Must Be 10 Characters Long';
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    event.preventDefault(); // Don't let form get submitted if any error/left out box
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
